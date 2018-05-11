@@ -9,6 +9,18 @@ public class JUEGODEGATO extends AppCompatActivity implements View.OnClickListen
 
     public Button b1, b2, b3, b4 ,b5, b6, b7, b8, b9;
     public Button[] matriz;
+    Object[][] lamatriz;
+    boolean turno;
+
+    public void init(){
+        lamatriz = new Object[3][3];
+        for(int cont = 0 ; cont < 3 ; cont ++){
+            for(int cont1 = 0 ; cont1 < 3 ; cont1 ++){
+                lamatriz[cont][cont1]= R.drawable.p;
+            }
+        }
+        turno=true;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +35,7 @@ public class JUEGODEGATO extends AppCompatActivity implements View.OnClickListen
         b7 = (Button)findViewById(R.id.b7);
         b8 = (Button)findViewById(R.id.b8);
         b9 = (Button)findViewById(R.id.b9);
-
+        this.init();
         matriz = new Button[]{b1, b2, b3, b4 ,b5, b6, b7, b8, b9};
         for(Button b : matriz){
             b.setOnClickListener(this);
@@ -32,5 +44,53 @@ public class JUEGODEGATO extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v){
+        Button b = (Button)v;
+        this.click(b);
     }﻿
+
+    public void click(Button b){
+
+        int x = 0;
+        if(turno){
+            x = R.drawable.x;
+            b.setBackgroundResource(x);
+        }else
+            {
+            x = R.drawable.o;
+            b.setBackgroundResource(x);
+        }
+
+        switch (b.getId()){
+            case R.id.b1:
+                lamatriz[0][0]= x;
+                break;
+            case R.id.b2:
+                lamatriz[0][1]= x;
+                break;
+            case R.id.b3:
+                lamatriz[0][2]= x;
+                break;
+            case R.id.b4:
+                lamatriz[1][0]= x;
+                break;
+            case R.id.b5:
+                lamatriz[1][1]= x;
+                break;
+            case R.id.b6:
+                lamatriz[1][2]= x;
+                break;
+            case R.id.b7:
+                lamatriz[2][0]= x;
+                break;
+            case R.id.b8:
+                lamatriz[2][1]= x;
+                break;
+            case R.id.b9:
+                lamatriz[2][2]= x;
+                break;
+        }
+
+        turno =! turno;
+        b.setClickable(true);
+    }
 }
